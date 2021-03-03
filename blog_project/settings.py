@@ -39,10 +39,30 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'posts',
     'rest_framework',
+    'rest_auth', # new
+     'allauth',  # new 
+     'allauth.account',  # new 
+     'allauth.socialaccount',  # new 
+     
+     'rest_auth.registration', # new
+
+    'rest_framework.authtoken', # new
 ]
+
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend' # new
+SITE_ID = 1 # new
+
+
 # new 
 REST_FRAMEWORK = {
-    'DEFAULT_PERMISSION_CLASSES': ['rest_framework.permissions.IsAuthenticated',]
+    'DEFAULT_PERMISSION_CLASSES': ['rest_framework.permissions.IsAuthenticated',],
+    'DEFAULT_AUTHENTICATION_CLASSES': [  # new 
+    'rest_framework.authentication.SessionAuthentication',
+    #  'rest_framework.authentication.BasicAuthentication'
+     'rest_framework.authentication.TokenAuthentication', # new
+      ],
+    
+
     }
 #• AllowAny - any user, authenticated or not, has full access • IsAuthenticated - only authenticated, registered users have access • IsAdminUser - only admins/superusers have access • IsAuthenticatedOrReadOnly - unauthorized users can view any page, but only authenticated users have write, edit, or delete privileges
 MIDDLEWARE = [
